@@ -13,7 +13,15 @@ public class StudentService {
         return studentDao.getAll();
     }
 
-    public Student findID(){
-        return studentDao.findById(findID().getId());
+    public Student findID(int id) {
+        return studentDao.findById(id);
+    }
+
+    public boolean insert(Student student) {
+        return studentDao.insert(student);
+    }
+
+    public boolean removeStudent(int id) {
+        return studentDao.removeStudent(id);
     }
 }

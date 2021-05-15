@@ -3,9 +3,7 @@ package controller;
 import entity.Student;
 import service.StudentService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -14,7 +12,6 @@ public class StudentController {
 
     StudentService studentService = new StudentService();
 
-//     http://something.com/rest/students
     @GET
     @Path("/")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -22,12 +19,25 @@ public class StudentController {
         return studentService.getListStudent();
     }
 
-    // http://something.com/rest/students/123
     @GET
-    @Path("/1")
+    @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Student getStudent() {
-        return studentService.findID();
+    public Student getStudent(@PathParam("id") int id) {
+        return studentService.findID(id);
+    }
+
+    @POST
+    @Path("/")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String addNewStudent(Student student) {
+        return studentService.insert(student) ? "Thêm mới thành công" : "Thêm mới thất bại";
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String removeStudent(@PathParam("id") int id) {
+        return studentService.removeStudent(id) ? "Xóa thành công" : "Xóa thất bại";
     }
 
 }
