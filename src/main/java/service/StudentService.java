@@ -10,7 +10,10 @@ public class StudentService {
     StudentDao studentDao = new StudentDao();
 
     public List<Student> getListStudent() {
-        return studentDao.getListStudent();
+        return studentDao.getAll();
     }
 
+    public Student findID(){
+        return studentDao.findById(findID().getId());
+    }
 }

@@ -1,19 +1,47 @@
 package repository;
 
 import entity.Student;
-
-import java.util.ArrayList;
-import java.util.Date;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import util.HibernateUtil;
 import java.util.List;
 
 public class StudentDao {
 
-    public List<Student> getListStudent() {
-        List<Student> students = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            students.add(new Student(i, "Nguyen Van " + i, new Date(), "CN" + i));
+    Logger logger = Logger.getLogger(StudentDao.class);
+    public List<Student> getAll() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            List<Student> students = session.createQuery("from Student").list();
+            session.getTransaction().commit();
+            return students;
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            logger.error(e);
+        } finally {
+            session.close();
         }
-        return students;
+        return null;
     }
 
+    public Student findById(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query<Student> query = session.createQuery("select s from Student s where s.id = :p_student_id");
+            query.setParameter("p_student_id", id);
+            Student student = query.getSingleResult();
+            session.getTransaction().commit();
+            return student;
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            logger.error(e);
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 }

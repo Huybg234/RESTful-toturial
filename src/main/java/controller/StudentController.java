@@ -14,7 +14,7 @@ public class StudentController {
 
     StudentService studentService = new StudentService();
 
-    // http://something.com/rest/students
+//     http://something.com/rest/students
     @GET
     @Path("/")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -23,11 +23,11 @@ public class StudentController {
     }
 
     // http://something.com/rest/students/123
-//    @GET
-//    @Path("/123")
-//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-//    public Student getStudent() {
-//        return studentService.getListStudent();
-//    }
+    @GET
+    @Path("/1")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Student getStudent() {
+        return studentService.findID();
+    }
 
 }
