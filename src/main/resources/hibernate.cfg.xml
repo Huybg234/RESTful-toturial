@@ -17,5 +17,6 @@
         <property name="hibernate.connection.defaultNChar">true</property>
 
         <mapping class="entity.Student"/>
+        <mapping class="entity.Subject"/>
     </session-factory>
 </hibernate-configuration>
