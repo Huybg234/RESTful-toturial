@@ -12,4 +12,5 @@ public class SubjectService {
     public List<Subject> getListSubject() {
         return subjectDao.getAllSubject();
     }
+
 }

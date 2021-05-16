@@ -11,12 +11,14 @@ import java.util.List;
 
 @Path("/subjects")
 public class SubjectController {
+
     SubjectService subjectService = new SubjectService();
 
     @GET
     @Path("/")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Subject> getListSubject() {
         return subjectService.getListSubject();
     }
+
 }

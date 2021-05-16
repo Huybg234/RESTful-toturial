@@ -14,28 +14,28 @@ public class StudentController {
 
     @GET
     @Path("/")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Student> getListStudent() {
         return studentService.getListStudent();
     }
 
     @GET
     @Path("/{id}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public Student getStudent(@PathParam("id") int id) {
         return studentService.findID(id);
     }
 
     @POST
     @Path("/")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public String addNewStudent(Student student) {
         return studentService.insert(student) ? "Thêm mới thành công" : "Thêm mới thất bại";
     }
 
     @DELETE
     @Path("/{id}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public String removeStudent(@PathParam("id") int id) {
         return studentService.removeStudent(id) ? "Xóa thành công" : "Xóa thất bại";
     }
