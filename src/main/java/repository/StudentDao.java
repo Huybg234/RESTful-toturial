@@ -36,10 +36,12 @@ public class StudentDao {
     }
 
     public boolean insert(Student student) {
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
             session.save(student);
+            session.getTransaction().commit();
             return true;
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             logger.error(e);
         }
         return false;
@@ -47,16 +49,16 @@ public class StudentDao {
 
     public boolean removeStudent(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             session.beginTransaction();
             Student student = session.load(Student.class, id);
             session.delete(student);
             session.getTransaction().commit();
             return true;
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             session.getTransaction().rollback();
             logger.error(e);
-        }finally {
+        } finally {
             session.close();
         }
         return false;

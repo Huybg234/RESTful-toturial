@@ -29,6 +29,7 @@ public class StudentController {
     @POST
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public String addNewStudent(Student student) {
         return studentService.insert(student) ? "Thêm mới thành công" : "Thêm mới thất bại";
     }
